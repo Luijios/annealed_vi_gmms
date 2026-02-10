@@ -8,7 +8,7 @@ from src.utils import *
 ###### TRAINING LOOP #######
 ############################
     
-def train_bimodal(model, target, config, save=False, output_dir=None):# n_iter, lr, n_batch=1024, beta_schedule=None, n_checkpoints=10):
+def train_bimodal(model, target, config, save=False, output_dir=None):
 
     if save:
         with open(output_dir+'/config.json', 'x') as config_file:
@@ -51,8 +51,6 @@ def train_bimodal(model, target, config, save=False, output_dir=None):# n_iter, 
             log_Z = torch.logsumexp(np.log(2*radius/100) + beta*(target.log_marginal_density(torch.linspace(-10*radius, 10*radius, 1000, device=model.device))), axis=-1) - (target.dim-1)/2*(np.log(beta) + (beta-1)*np.log(2*np.pi))
             loss_list.append((loss + log_Z).item())
 
-            #mean_grad_norms.append(model.means.grad.detach().norm(2))
-            #var_grad_norms.append(model.vars.grad.detach().norm(2))
             vars[0].append(model.vars[0].item())
             vars[1].append(model.vars[1].item())
             summary_statistics[0].append(model.means[0,0].item()/radius)

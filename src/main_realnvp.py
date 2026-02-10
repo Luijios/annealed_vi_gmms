@@ -29,14 +29,11 @@ radius = config['teacher_param']['radius']
 w_star = config['teacher_param']['weight']
 
 torch.manual_seed(config['teacher_param']['seed'])
-mu_star = torch.randn(dim, device=device).double()
+mu_star = torch.randn(dim, device=device)
 mu_star = mu_star / torch.norm(mu_star)
-#target_means = torch.zeros(2, dim, device=device).double()
-#target_means[0,0] = radius
-#target_means[1,0] = -radius
 target_means = torch.stack([radius*mu_star, -radius*mu_star])
-target_vars = torch.tensor([1., 1.], device=device).double()
-target_weights = torch.tensor([w_star, 1-w_star], device=device).double()
+target_vars = torch.tensor([1., 1.], device=device)
+target_weights = torch.tensor([w_star, 1-w_star], device=device)
 target = MIG(target_means, target_vars, target_weights, device=device)
 
 

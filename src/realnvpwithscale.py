@@ -1,6 +1,5 @@
-__from__ = "Xinqiang Ding <xqding@umich.edu>"
 __author__ = "Luigi Fogliani"
-__date__ = "2025/05/23"
+__date__ = "2026/02/10"
 
 
 import numpy as np
@@ -38,8 +37,6 @@ class Affine_Coupling(nn.Module):
             nn.Linear(self.hidden_dim, self.input_dim),
             nn.Tanh() #for a mysterious reason, using ReLU makes the training impossible, when scale and translation have same depth
         )
-        #self.scale = nn.Parameter(torch.Tensor(1))
-        #init.normal_(self.scale)
 
         ## layers used to compute translation in affine transformation
         self.translation_fct = nn.Sequential(
@@ -134,9 +131,6 @@ class RealNVP(nn.Module):
         for i in range(self.num_layers):
             x, logdet = self.affine_couplings[i](x)
             logdet_tot = logdet_tot + logdet
-            # if self.use_batch_norm_between_layers:
-            #     x, logdet = self.batchnorm_layers[i](x)
-            #     logdet_tot =  logdet_tot + logdet
         return x, logdet_tot
 
     def inverse(self, x):
@@ -145,9 +139,6 @@ class RealNVP(nn.Module):
         logdet_tot = torch.zeros(z.shape[0], device=self.device)
         ## inverse affine coupling layers
         for i in range(self.num_layers-1, -1, -1):
-            # if self.use_batch_norm_between_layers:
-            #     z, logdet = self.batchnorm_layers[i].inverse(z)
-            #     logdet_tot =  logdet_tot + logdet
             z, logdet = self.affine_couplings[i].inverse(z)
             logdet_tot = logdet_tot + logdet
             

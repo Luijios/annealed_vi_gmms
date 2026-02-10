@@ -1,7 +1,9 @@
 import torch
 import numpy as np
-from utils import *
 import json
+from src.utils import *
+from src.realnvpwithscale import *
+
 
 
 ############################
@@ -23,8 +25,6 @@ def train_realnvp(flow, target, config, save=False, output_dir=None):
 
     opt = torch.optim.Adam([
         {'params': flow.affine_couplings.parameters()},
-        #{'params': flow.batchnorm_layers[:-1].parameters()},
-        #{'params': flow.batchnorm_layers[-1].parameters(), 'lr': 1e-1},
     ], lr=config['opt_param']['learning_rate'])
 
     #metrics
@@ -54,9 +54,6 @@ def train_realnvp(flow, target, config, save=False, output_dir=None):
 
         #logs
         with torch.no_grad():
-            #log_Z = torch.logsumexp(np.log(2*radius/100) + beta*(target.log_marginal_density(torch.linspace(-10*radius, 10*radius, 1000, device=flow.device))), axis=-1) - (target.dim-1)/2*(np.log(beta) + (beta-1)*np.log(2*np.pi))
-            #means.append(torch.mean(x[:,0].detach(), axis=0).item())
-            #vars.append(torch.std(x[:,0].detach(), axis=0).item())
 
             log_Z = torch.logsumexp(np.log(radius/100) + beta*log_marginal, axis=-1) - (target.dim-1)/2*(np.log(beta) + (beta-1)*np.log(2*np.pi))
             loss_list.append((loss + log_Z + torch.mean(flow.prior.log_prob(z))).item())
@@ -79,7 +76,6 @@ def train_realnvp(flow, target, config, save=False, output_dir=None):
         if save:
             if (t+1) % (n_iter//n_checkpoints) == 0:
                 torch.save(flow.state_dict(), output_dir+'/checkpoint'+str((t+1) // (n_iter//n_checkpoints))+'.pt')
-                #models.append(copy.deepcopy(flow).to('cpu'))
 
     flow.eval()
     
