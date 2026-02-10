@@ -3,11 +3,12 @@ import torch
 import numpy as np
 
 
-from isotropic_gaussian import *
-from train_bimodal import *
-from utils import *
+from src.isotropic_gaussian import *
+from src.train_bimodal import *
+from src.utils import *
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+#device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+device = torch.device('mps')
 
 parser = argparse.ArgumentParser(description='Prepare experiment')
 parser.add_argument('--config', type=str, required=True)

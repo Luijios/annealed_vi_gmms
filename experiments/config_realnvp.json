@@ -1,0 +1,6 @@
+{
+    "teacher_param": {"dim": 128, "radius": 3.0, "weight": 0.8, "seed":0},
+    "nf_param": {"seed": 0,"num_layers": 8, "hidden_dim": 512},
+    "opt_param": {"seed": 0,"n_iter": 700,"learning_rate": 1e-3,"n_batch": 1024,"n_checkpoints": 1},
+    "annealing_param": {"type": "exp","beta_i": 0.111111,"t0": 600.0}
+}

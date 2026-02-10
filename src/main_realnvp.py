@@ -3,16 +3,12 @@ import json
 import torch
 import numpy as np
 
-import sys
-import os
-print(f"Current Working Directory: {os.getcwd()}")
-print(f"Python Path: {sys.path}")
-
 from isotropic_gaussian import *
 from train_realnvp import *
 from realnvpwithscale import *
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+#device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+device = torch.device('mps')
 
 parser = argparse.ArgumentParser(description='Prepare experiment')
 parser.add_argument('--config', type=str, required=True)

@@ -19,7 +19,7 @@ def g_prime(m, w_star, R, u=1, eps=1e-5):
 ##### ANNEALING SCHEDULES #####
 
 def annealing_schedule(t, param):
-    t0 = param['rate']
+    t0 = param['t0']
     beta_i = param['beta_i']
     type = param['type']
 
