@@ -22,15 +22,15 @@ Finally, ``utils.py`` implements some useful functions.
 
 ### Experiments
 
-Running experiments requires a ``config.json`` file and an output directory. In ``experiments`` we provide examples for the configurations files.
+Running experiments requires a ``config.json`` file containing hyperparameters. In ``experiments`` we provide examples for the configurations files.
 
-Here are two example prompts:
-
+Here are two example commands:
 ```bash
 PYTHONPATH=. uv run python src/main_bimodal_gaussian.py --config ./experiments/config_bimodal.json --output-dir ./data/bimodal
 PYTHONPATH=. uv run python src/main_realnvp.py --config ./experiments/config_realnvp.json --output-dir ./data/realnvp
 ```
+specify in each case the path to the ``confing.json`` file and the output directory containing the output of the training.
 
 # Notebooks
 
-``preliminary_experiments.ipynb`` shows some examples of training both isotropic Gaussian mixtures and RealNVP for the exponential annealing schedule highlighted in the paper.
+In ``preliminary_experiments.ipynb`` we provide some examples of training with isotropic Gaussian mixtures and RealNVP models with annealing VI using the exponential annealing schedule highlighted in the paper.
