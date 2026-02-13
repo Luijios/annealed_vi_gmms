@@ -28,11 +28,9 @@ Here are two example prompts:
 
 ```bash
 PYTHONPATH=. uv run python src/main_bimodal_gaussian.py --config ./experiments/config_bimodal.json --output-dir ./data/bimodal
-PYTHONPATH=. uv run python src/main_realnvp.py --config ./experiments/config_realnvp.json --output-dir ./data/realvp
+PYTHONPATH=. uv run python src/main_realnvp.py --config ./experiments/config_realnvp.json --output-dir ./data/realnvp
 ```
 
 # Notebooks
 
 ``preliminary_experiments.ipynb`` shows some examples of training both isotropic Gaussian mixtures and RealNVP for the exponential annealing schedule highlighted in the paper.
-
-``draft_figures.ipynb`` reproduces the figures from the paper, using training results from ``data``.
