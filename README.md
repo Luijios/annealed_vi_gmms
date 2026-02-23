@@ -1,6 +1,6 @@
 # Annealing Variational Inference on a bimodal Gaussian mixture
 
-This repository contains the code related to the following paper:
+This repository contains the code related to the following paper: https://arxiv.org/abs/2602.12923
 
 # Code structure
 
@@ -34,3 +34,4 @@ specify in each case the path to the ``confing.json`` file and the output direct
 # Notebooks
 
 In ``preliminary_experiments.ipynb`` we provide some examples of training with isotropic Gaussian mixtures and RealNVP models with annealing VI using the exponential annealing schedule highlighted in the paper.
+
